@@ -6,7 +6,7 @@ import Beat from '../../lights.mp3';
 const App = () => {
 
   let width = 1000;
-  let height = 700;
+  let height = 400;
   let song;
   let fft;
 
@@ -26,8 +26,10 @@ const App = () => {
     canvas.mousePressed(() => {
       if (song.isPlaying()) {
         song.pause();
+        // p.noLoop();
       } else {
         song.play();
+        // p.loop();
       }
     });
   }
@@ -38,9 +40,12 @@ const App = () => {
     // we need to change this in order to see the wave
     p.stroke(255, 204, 0);
 
+    // no fill in between waves
+    p.noFill();
     // returns an array with 1024 elements
     let wave = fft.waveform();
 
+    p.beginShape();
     // By looping through the waveform data, we are able
     // to draw the waveform across the canvas
     for (let i = 0; i < width; i++) {
@@ -51,8 +56,9 @@ const App = () => {
 
       let x = i;
       let y = wave[index] * 180 + height / 2;
-      p.point(x, y);
+      p.vertex(x, y);
     }
+    p.endShape();
   }
 
   return (
