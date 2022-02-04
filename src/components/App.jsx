@@ -5,8 +5,8 @@ import Beat from '../../lights.mp3';
 
 const App = () => {
 
-  let width = 1000;
-  let height = 400;
+  let width = 1900;
+  let height = 700;
   let song;
   let fft;
 
@@ -26,10 +26,10 @@ const App = () => {
     canvas.mousePressed(() => {
       if (song.isPlaying()) {
         song.pause();
-        // p.noLoop();
+        p.noLoop();
       } else {
         song.play();
-        // p.loop();
+        p.loop();
       }
     });
   }
@@ -55,7 +55,7 @@ const App = () => {
       let index = p.floor(p.map(i, 0, width, 0, wave.length));
 
       let x = i;
-      let y = wave[index] * 180 + height / 2;
+      let y = wave[index] * 140 + height / 2;
       p.vertex(x, y);
     }
     p.endShape();
