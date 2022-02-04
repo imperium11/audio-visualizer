@@ -5,7 +5,7 @@ import Beat from '../../Beat.mp3';
 
 const App = () => {
 
-  let width = 500;
+  let width = 700;
   let height = 400;
   let song;
 
@@ -15,6 +15,8 @@ const App = () => {
   }
 
   const setup = (p5, canvasParentRef) => {
+    // use parent to render the canvas in this ref
+		// without it p5 will render the canvas outside of this component
     const canvas = p5.createCanvas(width, height).parent(canvasParentRef);
     canvas.mousePressed(() => {
       if (song.isPlaying()) {
@@ -26,12 +28,13 @@ const App = () => {
   }
 
   const draw = p5 => {
-    p5.background(255, 200, 100);
+    p5.background(0);
+    p5.ellipse(350, 200, 100)
   }
 
   return (
     <div>
-      <h1>Audio Viualizer</h1>
+      <h1>Audio Visualizer</h1>
       <Sketch preload={preload} setup={setup} draw={draw}/>
     </div>
   );
