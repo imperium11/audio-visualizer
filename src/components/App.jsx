@@ -51,7 +51,7 @@ const App = () => {
     for (let i = 0; i < width; i++) {
       // create an index that maps the for loop variable
       // to the index of the wave we want
-      // value must be intereger thats we we use floor
+      // value must be integer thats we we use floor
       let index = p.floor(p.map(i, 0, width, 0, wave.length));
 
       let x = i;
