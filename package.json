@@ -4,7 +4,8 @@
   "description": "Creating an audio visualizer using p5.js and React.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev-build": "webpack -w",
+    "start": "nodemon server/server.js"
   },
   "repository": {
     "type": "git",
@@ -18,7 +19,19 @@
   },
   "homepage": "https://github.com/imperium11/audio-visualizer#readme",
   "dependencies": {
+    "express": "^4.17.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.17.0",
+    "@babel/preset-env": "^7.16.11",
+    "@babel/preset-react": "^7.16.7",
+    "babel-loader": "^8.2.3",
+    "html-loader": "^3.1.0",
+    "html-webpack-plugin": "^5.5.0",
+    "nodemon": "^2.0.15",
+    "webpack": "^5.68.0",
+    "webpack-cli": "^4.9.2"
   }
 }
