@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Sketch from 'react-p5';
 import 'p5/lib/addons/p5.sound';
-import Beat from '../../instrumental.mp3';
+import Beat from '../../lights.mp3';
 
 const App = () => {
 
@@ -25,14 +25,23 @@ const App = () => {
     const canvas = p.createCanvas(width, height).parent(canvasParentRef);
   }
 
-  const playStop = () => {
-    if (song.isPlaying()) {
-      song.pause();
-      //p.noLoop();
-    } else {
+  const play = () => {
+    if (!song.isPlaying()) {
       song.play();
-      //p.loop();
     }
+  }
+
+  const stop = () => {
+    song.pause();
+  }
+
+  const restart = () => {
+    if (song.isPaused()) {
+      song.playMode('restart');
+      song.play();
+    }
+    song.playMode('restart');
+    song.play();
   }
 
   const draw = p => {
@@ -66,7 +75,11 @@ const App = () => {
     <div className='outerbox'>
       <h1>Audio Visualizer</h1>
       <Sketch preload={preload} setup={setup} draw={draw}/>
-      <button onClick={playStop}>Play/Stop</button>
+      <div className='controls'>
+      <button onClick={play}>Play</button>
+      <button onClick={stop}>Stop</button>
+      <button onClick={restart}>Restart</button>
+      </div>
     </div>
   );
 }
