@@ -1,12 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Sketch from 'react-p5';
 import 'p5/lib/addons/p5.sound';
-import Beat from '../../lights.mp3';
+import Beat from '../../instrumental.mp3';
 
 const App = () => {
 
-  let width = 1900;
-  let height = 700;
+  let width = 900;
+  let height = 600;
   let song;
   let fft;
 
@@ -23,15 +23,16 @@ const App = () => {
     // use parent to render the canvas in this ref
 		// without it p5 will render the canvas outside of this component
     const canvas = p.createCanvas(width, height).parent(canvasParentRef);
-    canvas.mousePressed(() => {
-      if (song.isPlaying()) {
-        song.pause();
-        p.noLoop();
-      } else {
-        song.play();
-        p.loop();
-      }
-    });
+  }
+
+  const playStop = () => {
+    if (song.isPlaying()) {
+      song.pause();
+      //p.noLoop();
+    } else {
+      song.play();
+      //p.loop();
+    }
   }
 
   const draw = p => {
@@ -55,16 +56,17 @@ const App = () => {
       let index = p.floor(p.map(i, 0, width, 0, wave.length));
 
       let x = i;
-      let y = wave[index] * 140 + height / 2;
+      let y = wave[index] * 100 + height / 2;
       p.vertex(x, y);
     }
     p.endShape();
   }
 
   return (
-    <div>
+    <div className='outerbox'>
       <h1>Audio Visualizer</h1>
       <Sketch preload={preload} setup={setup} draw={draw}/>
+      <button onClick={playStop}>Play/Stop</button>
     </div>
   );
 }
