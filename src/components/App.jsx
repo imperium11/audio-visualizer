@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Sketch from 'react-p5';
 import 'p5/lib/addons/p5.sound';
-import Beat from '../../lights.mp3';
+import Beat from '../../instrumental.mp3';
 
 const App = () => {
 
@@ -16,6 +16,8 @@ const App = () => {
   }
 
   const setup = (p, canvasParentRef) => {
+
+    p.angleMode(p.DEGREES);
     // react-p5 conveniently initializes window.p5 thats why all the other p5's
     // have been changed to p in order to create an FFT object
     fft = new p5.FFT();
@@ -52,23 +54,32 @@ const App = () => {
 
     // no fill in between waves
     p.noFill();
+
+    p.translate(width / 2, height / 2);
+
     // returns an array with 1024 elements
     let wave = fft.waveform();
 
-    p.beginShape();
-    // By looping through the waveform data, we are able
-    // to draw the waveform across the canvas
-    for (let i = 0; i < width; i++) {
-      // create an index that maps the for loop variable
-      // to the index of the wave we want
-      // value must be integer thats we we use floor
-      let index = p.floor(p.map(i, 0, width, 0, wave.length));
+    for (let t = -1; t <= 1; t += 2) {
+      p.beginShape();
+      // By looping through the waveform data, we are able
+      // to draw the waveform across the canvas
+      for (let i = 0; i <= 180; i++) {
+        // create an index that maps the for loop variable
+        // to the index of the wave we want
+        // value must be integer thats we we use floor
+        let index = p.floor(p.map(i, 0, 180, 0, wave.length - 1));
 
-      let x = i;
-      let y = wave[index] * 100 + height / 2;
-      p.vertex(x, y);
+        let r = p.map(wave[index], -1, 1, 150, 300);
+
+        let x = r * p.sin(i) * t;
+        let y = r * p.cos(i);
+        p.vertex(x, y);
+      }
+      p.endShape();
     }
-    p.endShape();
+
+
   }
 
   return (
