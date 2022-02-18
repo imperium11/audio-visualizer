@@ -1,9 +1,9 @@
 # Audio Visualizer
-Creating an audio visualizer using p5.js and React\
+An audio visualizer built using p5.js and React\
 \
 Clone down the repository\
 \
-In the terminal type:\
+In the terminal:\
 `npm install`\
-`npm run build`\
+`npm run build` or `npm run dev-build` for development\
 `npm start`
